@@ -13,12 +13,12 @@ namespace bank_objects
         private string _accountNumber;
 
         //Default Constructor
-        public Customer()
+       /* public Customer()
         {
-            _firstName = "Maija";
-            _lastName = "Meikäläinen";
-            _accountNumber ="FI1234567891234567";
-        }
+            _firstName = null;//"Maija";
+                _lastName = null; //"Meikäläinen";
+                    _accountNumber = null; //"FI1234567891234567";
+        }*/
 
         //Constructor with Parameters
         public Customer(string firstName, string lastName, string accountNumber)
@@ -48,7 +48,12 @@ namespace bank_objects
 
         public override string ToString()
         {
-            return "Customer: " + _firstName + " " + _lastName + "Account Number: " + _accountNumber;
+            return Print();
+        }
+
+        public string Print()
+        {
+            return "Customer: " + _firstName + " " + _lastName + " Account Number: " + _accountNumber;
         }
     }
 }

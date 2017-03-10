@@ -8,27 +8,68 @@ namespace bank_objects
 {
     class BankAccount
     {
-        private int _accountNumber;
+        private string _accountNumber;
+        //Transaction myTransaction = new Transaction();
+        private double _accountBalance; //maybe double is not the best way to handle account balance. How about decimal or float then?
+        private List<Transaction> _transactionList;
+        
 
-        public string AccountTransaction()
+        public BankAccount()
         {
-            return"AccountTransaction";
+            _accountNumber = null;
+            //_transactionHistory["5/1/2016 8:30:52 AM"] = 0.50;
+            _transactionList = new List<Transaction>();
+            _accountBalance = 0.0;
+
         }
 
-        public string AccountBalance()
+        public BankAccount(string accountNumber, double accountBalance)
         {
-            return"Balance";
+            _accountNumber = accountNumber;
+            _transactionList = new List<Transaction>();
+            _accountBalance = accountBalance;
         }
 
-        public string AddTransaction()
+
+        public string AccountNumber
         {
-            return "Transaction";
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
         }
 
-        public string RetrieveTransactionHistory()
+        public double AccountBalance
+        {
+            get { return _accountBalance;}
+            set { _accountBalance = value; }
+        }
+
+        public List<Transaction> TransactionList
+        {
+            get { return _transactionList; }
+           set { _transactionList = value; }
+        }
+
+       /* public List<Transaction> AddCustomerAccountTransaction(Transaction transaction)
+        {
+
+            _transactionList.Add(transaction);
+            foreach (Transaction tTransaction in _transactionList)
+            {
+               Console.WriteLine("This is the change to account balance: " + tTransaction.Sum); 
+            }
+
+            return TransactionList; 
+        }*/
+
+        public void RetrieveCustomerTransactionsByDateAndTime()
         {
             
-            return "TransactionHistory";
+        }
+
+       public void RetrieveCustomerTransactionHistory(string accountNumber)
+        {
+           
+
         }
     }
 }
