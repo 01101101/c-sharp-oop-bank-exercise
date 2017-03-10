@@ -49,26 +49,31 @@ namespace bank_objects
            set { _transactionList = value; }
         }
 
-       /* public List<Transaction> AddCustomerAccountTransaction(Transaction transaction)
+       public void AddCustomerAccountTransaction(Transaction transaction)
         {
 
             _transactionList.Add(transaction);
-            foreach (Transaction tTransaction in _transactionList)
-            {
-               Console.WriteLine("This is the change to account balance: " + tTransaction.Sum); 
-            }
+  
 
-            return TransactionList; 
-        }*/
+            //return TransactionList; 
+        }
 
         public void RetrieveCustomerTransactionsByDateAndTime()
         {
-            
+            //return ;   
         }
 
-       public void RetrieveCustomerTransactionHistory(string accountNumber)
+       public void RetrieveCustomerTransactionHistory(double accountBalance)
         {
-           
+
+            string TransactionHistoryString;
+            for (int i = 0; i< _transactionList.Count;i++)
+            {
+                double summedUp = accountBalance + _transactionList[i].Sum;
+                TransactionHistoryString = string.Format("Account balance:{0} EURO -- Transaction sum: {1} EURO -- Transaction date: {2}\n -- Account Balance after transaction: {3} EURO",accountBalance,  _transactionList[i].Sum.ToString(), _transactionList[i].TransactionDateTimeStamp.ToString(),summedUp);
+                Console.WriteLine(TransactionHistoryString);
+            }
+            
 
         }
     }

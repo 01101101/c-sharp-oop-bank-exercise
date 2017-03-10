@@ -81,6 +81,7 @@ namespace bank_objects
                 }
 
             }
+            
             Console.WriteLine("Customers: ");
             dT.PrintOutCustomerList(customerList);
             
@@ -97,7 +98,7 @@ namespace bank_objects
                Console.WriteLine("for loop at the end: " + myBank.RetrieveCustomerAccountBalance(customerList[i].AccountNumber));
            } 
            //myBank.RetrieveAllCustomerAccountBalance();
-          // myBank.RetrieveCustomerAccountTransactionHistory(customerList[random.Next(3)].AccountNumber, myBankAccount.TransactionList);      
+           myBank.RetrieveCustomerAccountTransactionHistory(customerList[random.Next(3)].AccountNumber);      
            Console.ReadKey();
         }
     }

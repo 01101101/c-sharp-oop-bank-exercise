@@ -43,16 +43,22 @@ namespace bank_objects
             set { _bankAccountList = value; }
         }
 
-        public BankAccount AddTransactionToCustomerAccount(string accountNumber, DateTime randomDateTime, double randomSum)
+        public void AddTransactionToCustomerAccount(string accountNumber, DateTime randomDateTime, double randomSum)
         {
-            Transaction transaction = new Transaction(randomDateTime, randomSum);
+            for(int i = 0; i< BankAccountList.Count; i++) //iterating through bankaccountList to find the right account and adding a transaction to it
+            {                                               //should be done with LINQ. if time allows will come back to this
+                if(BankAccountList[i].AccountNumber == accountNumber)
+                BankAccountList[i].AddCustomerAccountTransaction(new Transaction(randomDateTime, randomSum));
+            }
+           /* 
             Console.WriteLine("This is the transaction: " + transaction.TransactionDateTimeStamp + transaction.Sum);
-            var storedVariable = BankAccountList.Find(p => p.AccountNumber == accountNumber);
+            var storedVariable = BankAccountList.Where(p => p.AccountNumber == accountNumber).Select(p => p.AddCustomerAccountTransaction(new Transaction (randomDateTime, randomSum)));
             
+
             storedVariable.AccountBalance += randomSum;
             Console.WriteLine("this is the balance changed: " + storedVariable.AccountBalance);
 
-            return storedVariable;
+            return storedVariable;*/
 
         }
 
@@ -101,20 +107,16 @@ namespace bank_objects
             return accountNumber;
         }
 
-        /*    public void RetrieveCustomerAccountTransactionHistory(string accountNumber)
+           public void RetrieveCustomerAccountTransactionHistory(string accountNumber)
             {
-                for (int i = 0; i < BankAccountList.Count; i++)
+            //      var storedTransactionHistory = BankAccountList.Where(p => p.AccountNumber == accountNumber).Select(p => p.RetrieveCustomerTransactionHistory());
+            //  return storedTransactionHistory;
+            for (int i = 0; i < BankAccountList.Count; i++)
                 {
 
                     if (BankAccountList[i].AccountNumber == accountNumber)
                     {
-                        Console.WriteLine("Account number: " + accountNumber + "\n" + "Transaction History");
-                        for (int k = 0; k < transactionList.Count; k++)
-                        {
-                            string message = string.Format("Amount and time: {0}e : {1}",
-                                transactionList[k].Sum, transactionList[k].TransactionDateTimeStamp);
-                            Console.WriteLine(message);
-                        }
+                        BankAccountList[i].RetrieveCustomerTransactionHistory(BankAccountList[i].AccountBalance);
                     }
                     else
                     {
@@ -123,8 +125,8 @@ namespace bank_objects
 
                 }
 
-
-            }*/
+            
+            }
 
     }
 }
