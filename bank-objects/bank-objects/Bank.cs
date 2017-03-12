@@ -123,9 +123,21 @@ namespace bank_objects
                         continue;
                     }
 
+                }           
+            }
+            public void RetrieveTransactionByDate(string accountNumber, DateTime startDate, DateTime endDate) //Finding transactions between given start date and end date
+            {
+               for (int i = 0; i<BankAccountList.Count;i++)
+                {
+                    if(BankAccountList[i].AccountNumber == accountNumber)
+                    {
+                        BankAccountList[i].RetrieveCustomerTransactionsByDateAndTime(startDate, endDate);
+                    }
                 }
+               /* var storedRetrievalQuery = (from BankAccount in BankAccountList
+                                       where BankAccount.AccountNumber == accountNumber
+                                       select BankAccount).First().RetrieveCustomerTransactionsByDateAndTime(startDate, endDate);*/
 
-            
             }
 
     }

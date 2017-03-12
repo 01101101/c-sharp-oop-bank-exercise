@@ -19,11 +19,17 @@ namespace bank_objects
             var time = new TimeSpan(9, 30, 0);
             date = date.Date + time;*/
 
-            DateTime start = new DateTime(2015, 1, 1);
-            int range = (DateTime.Today - start).Days;
-            DateTime returnDateTime = start.AddDays(rnd.Next(range));
+              DateTime startDate = new DateTime(2015, 1, 1); //arbitrarily chosen start date to start randoming dates. Could be anything
+              int dayRange = (DateTime.Today - startDate).Days; //Date of now minus chosen start date to get a difference in days
+              DateTime returnDateTime = startDate.AddDays(rnd.Next(dayRange)); // using the difference in the form of days as range to random date
             return returnDateTime;
 
+        }
+        public TimeSpan RandomTime()
+        {
+            TimeSpan randomTimeSpan = new TimeSpan(0, 0, 0, rnd.Next(86400));
+            return randomTimeSpan;
+            
         }
 
         public double RandomingAccountBalance ()//test to random a balance change to customer accounts
@@ -32,13 +38,13 @@ namespace bank_objects
             return RandomChangeAccountBalance;
         }
 
-        public double RandomingAccountStartingBalance()
+        public double RandomingAccountStartingBalance() // randoming starting balance to created accounts
         {
             double RandomStartingBalance = rnd.NextDouble() * (1000 - -1000) + -1000;
             return RandomStartingBalance;
         }
 
-        public void PrintOutCustomerList(List<Customer> customerList )
+        public void PrintOutCustomerList(List<Customer> customerList ) //a test print method
         {
             foreach (Customer customerPrintOutVariable in customerList)
             {
@@ -58,7 +64,7 @@ namespace bank_objects
             Bank myBank = new Bank("SKOP");
             //Customer myCustomer = new Customer();
             //List<Transaction> transactionList = new List<Transaction>();
-            List<Customer> customerList = new List<Customer>();
+            List<Customer> customerList = new List<Customer>(); //a list of customers for testing
             customerList.Add(new Customer("Mikko", "Mallikas", 
                 myBank.CreateNewAccount(dT.RandomingAccountStartingBalance())));
             customerList.Add(new Customer("Paavo", "Mallikas", 
@@ -92,13 +98,16 @@ namespace bank_objects
             //string inputFirstName = Console.ReadLine();
             //Console.WriteLine("Give me your last name");
             //string inputLastName = Console.ReadLine();
+            DateTime startDate = new DateTime(2016, 01, 01);
+            DateTime endDate = new DateTime(2017,01,01);
 
             for (int i = 0; i < customerList.Count;i++)
            {
-               Console.WriteLine("for loop at the end: " + myBank.RetrieveCustomerAccountBalance(customerList[i].AccountNumber));
-           } 
+                //Console.WriteLine("for loop at the end: " + myBank.RetrieveCustomerAccountBalance(customerList[i].AccountNumber));
+                myBank.RetrieveTransactionByDate(customerList[i].AccountNumber, startDate, endDate);
+            } 
            //myBank.RetrieveAllCustomerAccountBalance();
-           myBank.RetrieveCustomerAccountTransactionHistory(customerList[random.Next(3)].AccountNumber);      
+           myBank.RetrieveCustomerAccountTransactionHistory(customerList[random.Next(3)].AccountNumber); //randomizing which of the pre-set customers is used to print out transaction history 
            Console.ReadKey();
         }
     }

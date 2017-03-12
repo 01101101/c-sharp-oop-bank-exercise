@@ -58,9 +58,23 @@ namespace bank_objects
             //return TransactionList; 
         }
 
-        public void RetrieveCustomerTransactionsByDateAndTime()
+        public void RetrieveCustomerTransactionsByDateAndTime(DateTime startDate, DateTime endDate)
         {
-            //return ;   
+            for(int i = 0; i< TransactionList.Count;i++)
+            {
+                if (TransactionList[i].TransactionDateTimeStamp >= startDate && TransactionList[i].TransactionDateTimeStamp <= endDate)
+                {
+                    Console.WriteLine("Transaction: " + TransactionList[i].Sum + "--" + "Date of the transaction:" + TransactionList[i].TransactionDateTimeStamp);
+                }
+                else
+                    continue;
+            }
+            /* var storedTransaction = from transaction in TransactionList
+                   where transaction.TransactionDateTimeStamp >= startDate && transaction.TransactionDateTimeStamp <= endDate
+                   select transaction;
+
+            
+            return "" + storedTransaction;*/
         }
 
        public void RetrieveCustomerTransactionHistory(double accountBalance)
